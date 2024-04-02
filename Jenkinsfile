@@ -14,8 +14,11 @@ pipeline {
                 sh 'npm run build'
             }
         }
-        // Add more stages as needed
+        stage('End stage'){
+            steps{
+                
+            }
+        }
     }
-    
     
 }
