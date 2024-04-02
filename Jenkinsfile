@@ -17,9 +17,5 @@ pipeline {
         // Add more stages as needed
     }
     
-    post {
-        always {
-            // Add post-build actions here, such as sending notifications
-        }
-    }
+    
 }
