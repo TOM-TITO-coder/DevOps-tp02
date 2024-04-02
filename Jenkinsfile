@@ -14,10 +14,14 @@ pipeline {
                 sh 'npm run build'
             }
         }
-        stage('End stage'){
-            steps{
-                
-            }
+        
+    }
+    post {
+        failure {
+            telegramSend(
+                message: "Pipeline Failed: ${currentBuild.fullDisplayName}. Please check the Jenkins console output for more details.",
+                chatId: "987537983"
+            )
         }
     }
     
