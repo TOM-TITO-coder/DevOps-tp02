@@ -23,14 +23,18 @@ pipeline {
   stages {
     stage('Install Dependencies') {
       steps {
-        sh 'composer install'
-        sh 'php artisan key:generate'
-        sh 'npm install'
+        node {
+          sh 'composer install'
+          sh 'php artisan key:generate'
+          sh 'npm install'
+        }
       }
     }
     stage('Build') {
       steps {
-        sh 'npm run build'
+        node {
+          sh 'npm run build'
+        }
       }
     }
   }
@@ -38,12 +42,12 @@ pipeline {
   post {
     success {
       script {
-        sh 'curl -X POST -H "Content-Type: application/json" -d \'{"chat_id": "${CHAT_ID}", "text": "${TEXT_SUCCESS_BUILD}", "disable_notification": false}\' https://api.telegram.org/bot${TOKEN}/sendMessage'
+        sh "curl -X POST -H 'Content-Type: application/json' -d '{\"chat_id\": \"${CHAT_ID}\", \"text\": \"${TEXT_SUCCESS_BUILD}\", \"disable_notification\": false}' https://api.telegram.org/bot${TOKEN}/sendMessage"
       }
     }
     failure {
       script {
-        sh 'curl -X POST -H "Content-Type: application/json" -d \'{"chat_id": "${CHAT_ID}", "text": "${TEXT_FAILURE_BUILD}", "disable_notification": false}\' https://api.telegram.org/bot${TOKEN}/sendMessage'
+        sh "curl -X POST -H 'Content-Type: application/json' -d '{\"chat_id\": \"${CHAT_ID}\", \"text\": \"${TEXT_FAILURE_BUILD}\", \"disable_notification\": false}' https://api.telegram.org/bot${TOKEN}/sendMessage"
       }
     }
   }
