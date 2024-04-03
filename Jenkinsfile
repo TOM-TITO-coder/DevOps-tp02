@@ -20,7 +20,7 @@ pipeline {
     stages {
         stage('Install Dependencies') {
             steps {
-                node {
+                {
                     // Enclose shell commands inside a node block
                     sh 'composer install'
                     sh 'php artisan key:generate'
@@ -30,8 +30,8 @@ pipeline {
         }
         stage('Build') {
             steps {
-                node {
-                    sh 'npm run build'
+                {
+                    sh 'npm run'
                 }
             }
         }
