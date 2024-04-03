@@ -23,18 +23,14 @@ pipeline {
   stages {
     stage('Install Dependencies') {
       steps {
-        node {
-          sh 'composer install'
-          sh 'php artisan key:generate'
-          sh 'npm install'
-        }
+        sh 'composer install'
+        sh 'php artisan key:generate'
+        sh 'npm install'
       }
     }
     stage('Build') {
       steps {
-        node {
-          sh 'npm run build'
-        }
+        sh 'npm run build'
       }
     }
   }
