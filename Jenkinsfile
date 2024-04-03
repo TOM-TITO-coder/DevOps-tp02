@@ -26,14 +26,13 @@ pipeline {
     post {
         success {
             script {
-                bat "curl -X POST -H \"Content-Type: application/json\" -d \"{\\\"chat_id\\\":${CHAT_ID}, \\\"text\\\": \\\"Pipeline succeeded!\\\", \\\"disable_notification\\\": false}\" https://api.telegram.org/bot${TOKEN}/sendMessage"
+                sh "curl -X POST -H 'Content-Type: application/json' -d '{\"chat_id\": \"${CHAT_ID}\", \"text\": \"Pipeline succeeded!\", \"disable_notification\": false}' https://api.telegram.org/bot${TOKEN}/sendMessage"
             }
         }
         failure {
             script {
-                bat "curl -X POST -H \"Content-Type: application/json\" -d \"{\\\"chat_id\\\":${CHAT_ID}, \\\"text\\\": \\\"Pipeline failed!\\\", \\\"disable_notification\\\": false}\" https://api.telegram.org/bot${TOKEN}/sendMessage"
+                sh "curl -X POST -H 'Content-Type: application/json' -d '{\"chat_id\": \"${CHAT_ID}\", \"text\": \"Pipeline failed!\", \"disable_notification\": false}' https://api.telegram.org/bot${TOKEN}/sendMessage"
             }
         }
     }
-    
 }
