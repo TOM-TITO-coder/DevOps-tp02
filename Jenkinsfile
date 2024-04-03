@@ -3,8 +3,8 @@ pipeline {
 
      environment {
         // Telegram configre
-        TOKEN = credentials('telegramToken')
-        CHAT_ID = credentials('telegramChatid')
+        TOKEN = credentials('6649100675:AAHb--EZYBCeWdw4m6uUXlI5TqWYUCNEAuY')
+        CHAT_ID = credentials('987537983')
 
         // Telegram Message Pre Build
         CURRENT_BUILD_NUMBER = "${currentBuild.number}"
